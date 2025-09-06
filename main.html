@@ -3,11 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Indian Track Monitoring System - Real-time Railway Safety & Maintenance</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-green { background-color: #10B981; }
+        .status-yellow { background-color: #F59E0B; }
+        .status-red { background-color: #EF4444; }
+        .indian-flag-border {
+            border-top: 4px solid #FF9933;
+            border-bottom: 4px solid #138808;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
 </head>
-<body>
-    <h1>Hello World</h1>
-    <script src="main.py"></script>
-    <script src="main.js"></script>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg indian-flag-border">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-train text-3xl text-orange-500 mr-3"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">Indian Track Monitoring System</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-gray-600 hover:text-orange-500 transition duration-300">Overview</a>
+                    <a href="#monitoring" class="text-gray-600 hover:text-orange-500 transition duration-300">Live Monitoring</a>
+                    <a href="#safety" class="text-gray-600 hover:text-orange-500 transition duration-300">Safety Alerts</a>
+                    <a href="#maintenance" class="text-gray-600 hover:text-orange-500 transition duration-300">Maintenance</a>
+                    <a href="#analytics" class="text-gray-600 hover:text-orange-500 transition duration-300">Analytics</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="gradient-bg py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Advanced Railway Track Monitoring for India</h2>
+            <p class="text-xl text-white mb-8 max-w-3xl mx-auto">Real-time monitoring, predictive maintenance, and comprehensive safety management for Indian Railways infrastructure</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-lg">
+                    <i class="fas fa-eye text-4xl text-orange-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Real-time Monitoring</h3>
+                    <p class="text-gray-600">24/7 track condition monitoring with IoT sensors and AI analysis</p>
+                </div>
+                <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-lg">
+                    <i class="fas fa-shield-alt text-4xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Safety First</h3>
+                    <p class="text-gray-600">Advanced safety alerts and automated emergency response systems</p>
+                </div>
+                <div class="bg-white bg-opacity-90 rounded-lg p-6 shadow-lg">
+                    <i class="fas fa-tools text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Predictive Maintenance</h3>
+                    <p class="text-gray-600">AI-powered maintenance scheduling to prevent failures</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Monitoring Dashboard -->
+    <section id="monitoring" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Live Monitoring Dashboard</h2>
+            
+            <!-- Status Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-green-100 rounded-lg p-6 text-center">
+                    <i class="fas fa-check-circle text-3xl text-green-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-green-800">1,247</h3>
+                    <p class="text-green-700">Operational Tracks</p>
+                </div>
+                <div class="bg-yellow-100 rounded-lg p-6 text-center">
+                    <i class="fas fa-exclamation-triangle text-3xl text-yellow-600 mb-4 pulse-animation"></i>
+                    <h3 class="text-2xl font-bold text-yellow-800">23</h3>
+                    <p class="text-yellow-700">Maintenance Required</p>
+                </div>
+                <div class="bg-red-100 rounded-lg p-6 text-center">
+                    <i class="fas fa-times-circle text-3xl text-red-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-red-800">5</h3>
+                    <p class="text-red-700">Critical Alerts</p>
+                </div>
+                <div class="bg-blue-100 rounded-lg p-6 text-center">
+                    <i class="fas fa-clock text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-blue-800">98.7%</h3>
+                    <p class="text-blue-700">System Uptime</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Track Condition Overview</h3>
+                    <div class="chart-container">
+                        <canvas id="trackConditionChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Regional Performance</h3>
+                    <div class="chart-container">
+                        <canvas id="regionalChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Alerts -->
+    <section id="safety" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Safety Alert System</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-6">Recent Alerts</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <span class="status-indicator status-red"></span>
+                                <div>
+                                    <h4 class="font-semibold text-red-800">Track Crack Detected</h4>
+                                    <p class="text-red-600 text-sm">Sector 7B - KM 245.6 | 2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                <span class="status-indicator status-yellow"></span>
+                                <div>
+                                    <h4 class="font-semibold text-yellow-800">Temperature Anomaly</h4>
+                                    <p class="text-yellow-600 text-sm">Sector 12A - KM 156.2 | 4 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                <span class="status-indicator status-yellow"></span>
+                                <div>
+                                    <h4 class="font-semibold text-yellow-800">Vibration Spike</h4>
+                                    <p class="text-yellow-600 text-sm">Sector 3C - KM 89.4 | 6 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-6">Alert Categories</h3>
+                        <div class="chart-container">
+                            <canvas id="alertChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maintenance Scheduling -->
+    <section id="maintenance" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Maintenance Management</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold mb-6">Scheduled Maintenance</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left">Sector</th>
+                                        <th class="px-4 py-3 text-left">Type</th>
+                                        <th class="px-4 py-3 text-left">Priority</th>
+                                        <th class="px-4 py-3 text-left">Scheduled Date</th>
+                                        <th class="px-4 py-3 text-left">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-3">7B - KM 245.6</td>
+                                        <td class="px-4 py-3">Emergency Repair</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">Critical</span></td>
+                                        <td class="px-4 py-3">Today</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">In Progress</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3">12A - KM 156.2</td>
+                                        <td class="px-4 py-3">Preventive</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Medium</span></td>
+                                        <td class="px-4 py-3">Dec 28, 2024</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Scheduled</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3">5D - KM 78.9</td>
+                                        <td class="px-4 py-3">Routine Check</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Low</span></td>
+                                        <td class="px-4 py-3">Dec 30, 2024</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Scheduled</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3">9A - KM 123.4</td>
+                                        <td class="px-4 py-3">Inspection</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Low</span></td>
+                                        <td class="px-4 py-3">Jan 2, 2025</td>
+                                        <td class="px-4 py-3"><span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Scheduled</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold mb-6">Maintenance Stats</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">This Month</span>
+                                    <span class="text-sm font-semibold">87 Completed</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">On Schedule</span>
+                                    <span class="text-sm font-semibold">94%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 94%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Cost Efficiency</span>
+                                    <span class="text-sm font-semibold">89%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-orange-600 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Performance Analytics</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Monthly Performance Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Maintenance Cost Analysis</h3>
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Metrics -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-lg text-center">
+                    <i class="fas fa-chart-line text-4xl text-green-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">15% Reduction</h3>
+                    <p class="text-gray-600">In maintenance costs this year</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-lg text-center">
+                    <i class="fas fa-clock text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">99.2% Uptime</h3>
+                    <p class="text-gray-600">Average system availability</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-lg text-center">
+                    <i class="fas fa-shield-alt text-4xl text-orange-600 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Zero Incidents</h3>
+                    <p class="text-gray-600">Safety record for 180 days</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Contact & Support</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-orange-50 rounded-lg p-6 text-center">
+                    <i class="fas fa-phone text-3xl text-orange-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">24/7 Emergency Hotline</h3>
+                    <p class="text-gray-600 mb-4">For critical safety alerts and emergency response</p>
+                    <p class="text-lg font-bold text-orange-600">1800-11-3999</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-6 text-center">
+                    <i class="fas fa-envelope text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Technical Support</h3>
+                    <p class="text-gray-600 mb-4">For system issues and technical assistance</p>
+                    <p class="text-lg font-bold text-blue-600">support@itms.indianrail.gov.in</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-6 text-center">
+                    <i class="fas fa-map-marker-alt text-3xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Control Center</h3>
+                    <p class="text-gray-600 mb-4">National Railway Monitoring Hub</p>
+                    <p class="text-lg font-bold text-green-600">New Delhi, India</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 indian-flag-border">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Indian Track Monitoring System</h3>
+                    <p class="text-gray-300">Advanced railway infrastructure monitoring for a safer, more efficient Indian Railway network.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Key Features</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li>• Real-time Track Monitoring</li>
+                        <li>• Predictive Maintenance</li>
+                        <li>• Safety Alert System</li>
+                        <li>• Performance Analytics</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Government of India</h3>
+                    <p class="text-gray-300">Ministry of Railways<br>Rail India Technical and Economic Service<br>© 2024 Indian Railways</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 Indian Track Monitoring System. All rights reserved. | Developed for Indian Railways</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Track Condition Chart
+        const trackCtx = document.getElementById('trackConditionChart').getContext('2d');
+        new Chart(trackCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Excellent', 'Good', 'Fair', 'Needs Attention', 'Critical'],
+                datasets: [{
+                    data: [1247, 456, 123, 23, 5],
+                    backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#7C2D12'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Regional Performance Chart
+        const regionalCtx = document.getElementById('regionalChart').getContext('2d');
+        new Chart(regionalCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Northern', 'Southern', 'Eastern', 'Western', 'Central', 'Northeast'],
+                datasets: [{
+                    label: 'Performance Score',
+                    data: [95, 92, 88, 97, 94, 89],
+                    backgroundColor: ['#FF9933', '#FFFFFF', '#138808', '#FF9933', '#FFFFFF', '#138808'],
+                    borderColor: ['#FF6600', '#CCCCCC', '#0F5A0F', '#FF6600', '#CCCCCC', '#0F5A0F'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Alert Categories Chart
+        const alertCtx = document.getElementById('alertChart').getContext('2d');
+        new Chart(alertCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Track Defects', 'Temperature', 'Vibration', 'Structural', 'Environmental'],
+                datasets: [{
+                    data: [12, 8, 5, 2, 1],
+                    backgroundColor: ['#EF4444', '#F59E0B', '#3B82F6', '#8B5CF6', '#10B981'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Performance Trends Chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'System Uptime %',
+                    data: [98.5, 98.8, 99.1, 98.9, 99.2, 99.0, 98.7, 99.1, 99.3, 99.0, 98.9, 99.2],
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Safety Score %',
+                    data: [97.2, 97.8, 98.1, 97.9, 98.5, 98.2, 97.9, 98.3, 98.7, 98.4, 98.1, 98.6],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 95,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Cost Analysis Chart
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    label: 'Planned (₹ Crores)',
+                    data: [125, 140, 135, 150],
+                    backgroundColor: '#3B82F6'
+                }, {
+                    label: 'Actual (₹ Crores)',
+                    data: [118, 132, 128, 142],
+                    backgroundColor: '#10B981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Auto-refresh simulation for live data
+        setInterval(() => {
+            const statusElements = document.querySelectorAll('.pulse-animation');
+            statusElements.forEach(el => {
+                el.style.animation = 'none';
+                setTimeout(() => {
+                    el.style.animation = 'pulse 2s infinite';
+                }, 10);
+            });
+        }, 5000);
+    </script>
 </body>
 </html>
